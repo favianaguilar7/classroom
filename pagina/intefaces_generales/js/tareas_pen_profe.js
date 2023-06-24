@@ -3,7 +3,6 @@ var headers = {};
 var url = "http://localhost:3000";
 
 function init(){
-        // document.querySelector('.entrar').addEventListener('click', ver_materia);
         iniciar();
 }
 function ver_materia(){
@@ -32,9 +31,7 @@ function closeModal() {
             id_materia: id_materia
         }
     }).then(function(res){
-        
         agregar_alumnos(title_actividad);
-        // alert("Registro exitoso");
         document.getElementById('n1').style.display = 'none';
     }).catch(function(err){ 
         console.log(err);
@@ -71,7 +68,6 @@ function iniciar(){
         const {message} = data;
         var body = document.getElementsByTagName("section")[0];
         var h2   = document.createElement("h2");
-        // var h2 = document.createElement("h2");
         var textoCelda = document.createTextNode(message[0]["name_profe"]);
         h2.appendChild(textoCelda);
         body.appendChild(h2);
@@ -79,8 +75,6 @@ function iniciar(){
     }).catch(function(err){ 
         console.log(err);
     });
-
-    /////////usuario
 
     axios({
         method: 'post',
@@ -102,14 +96,11 @@ function iniciar(){
             const {data} = res;
             const {message} = data;
             var id = message[0]["id_profe"]
-            ////////
             var body = document.getElementsByTagName("section")[1];
-        var h4   = document.createElement("h4");
-        // var h2 = document.createElement("h2");
-        var textoCelda = document.createTextNode(message[0]["name_materia"]);
-        h4.appendChild(textoCelda);
-        body.appendChild(h4);
-        // h2.setAttribute("class", "nombusu");
+            var h4   = document.createElement("h4");
+            var textoCelda = document.createTextNode(message[0]["name_materia"]);
+            h4.appendChild(textoCelda);
+            body.appendChild(h4);
             /////
         }).catch(function(err){ 
             console.log(err);
@@ -125,21 +116,11 @@ function iniciar(){
 
             const {data} = res;
             const {message} = data;
-            // console.log(message);
-            // var body = document.getElementsByTagName("section")[2];
-            // var a = document.createElement("a");
-            // // var h2 = document.createElement("h2");
-            // var textoCelda = document.createTextNode(message[0]["title_actividad"]);
-            // a.appendChild(textoCelda);
-            // body.appendChild(a);
             var body = document.getElementsByTagName("tbody")[0];
             for(var i = 0; i < message.length; i++){
-                // console.log(message[i]);
                 var tr = document.createElement("tr");
                 var td = document.createElement("td");
-                // var a = document.createElement("a");
                 var textoCelda = document.createTextNode(message[i]["title_actividad"]);
-                // console.log(message[i]["title_actividad"]);
                 td.appendChild(textoCelda);
                 tr.appendChild(td);
                 var td = document.createElement("td");
@@ -153,8 +134,6 @@ function iniciar(){
                 input.setAttribute("value", "Ingresar");
                 input.setAttribute("onclick", "ingresar()");
                 input.setAttribute("id", message[i]["id_actividad"]);
-
-                // <td><input class="btn entrar" type="submit" value="Ingresar"></td>
                 td.appendChild(input);
                 tr.appendChild(td);
                 body.appendChild(tr);

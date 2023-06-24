@@ -3,12 +3,11 @@ var headers = {};
 var url = "http://localhost:3000";
 
 function init(){
-        // document.querySelector('.entrar').addEventListener('click', ver_materia);
         iniciar();
 }
+
 function iniciar(){
-    
-    var id = sessionStorage.getItem("id");
+    var id = sessionStorage.getItem("id");/// estrae del sesionstorage el id
     axios({
         method: 'post',
         url: url+'/user/c/'+id,
@@ -16,11 +15,11 @@ function iniciar(){
             id: id
         }
     }).then(function(res){
+        /// hce una peticion y coloca el nombre del porfesor correspondiente 
         const {data} = res;
         const {message} = data;
         var body = document.getElementsByTagName("section")[0];
         var h2   = document.createElement("h2");
-        // var h2 = document.createElement("h2");
         var textoCelda = document.createTextNode(message[0]["name_profe"]);
         h2.appendChild(textoCelda);
         body.appendChild(h2);
@@ -29,6 +28,7 @@ function iniciar(){
         console.log(err);
     });
 
+    /// aqui se hace una peticion para extraer el el nombre de la materia a calificar
     axios({
         method: 'post',
         url: url+'/user/b/'+sessionStorage.getItem("id_clase"),
@@ -43,6 +43,7 @@ function iniciar(){
         var textoCelda = document.createTextNode("Materia: "+message[0]["name_materia"]);
         h3.appendChild(textoCelda);
         body.appendChild(h3);
+            /// aqui se hace una peticion para extraer el titulo de la actividad a calificar
         axios({
             method: 'post',
             url: url+'/user/d/'+id,
@@ -52,23 +53,17 @@ function iniciar(){
         }).then(function(res){
             const {data} = res;
             const {message} = data;
-            // console.log(message);
             var nn = 0;
             for(var i = 0; i < message.length; i++){
                 var body = document.getElementsByTagName("tbody")[0];
-
-
                 var tr = document.createElement("tr");
-
                 var td = document.createElement("td");
-
                 var textoCelda = document.createTextNode(message[i]["title_actividad"]);
                 td.appendChild(textoCelda);
                 tr.appendChild(td);
                 console.log(message[i]["title_actividad"]);
                 body.appendChild(tr);
-                // var name_act = message[i]["title_actividad"]
-                // var nnn = 0;
+                /// aqui se hace una peticion para extraer el id de la actividad
                 axios({
                     method: 'post',
                     url: url+'/user/h/'+message[i]["id_actividad"],
@@ -78,58 +73,33 @@ function iniciar(){
                 }).then(function(res){
                     const {data} = res;
                     const {message} = data;
-                    // var nnn = 0;
-                    
+                    /// aqui se hace una peticion para extraer el nombre del alumno a calificar y si tiene calificacion
                     axios({
                         method: 'post',
                         url: url+'/user/nn/'+message[i]["id_alumnos"],
                         data:{
                             id: id
                         }
-                        
                     }).then(function(res){
-                        
                         const {data} = res;
                         const {messages} = data;
-                        // console.log(message[0]["name_alumnos"]);
-                        // var td = document.createElement("td");
-                        // const asd = messages[0]["name_alumnos"];
-                        // console.log(messages[0]["name_alumnos"]);
-                        // td.appendChild(textoCelda);
-                        // tr.appendChild(td);
-                        
-                        // nnn++;
-                        // var tr = document.createElement("tr");
-
                         var td = document.createElement("td");
-        
                         var textoCelda = document.createTextNode(messages[0]["name_alumnos"]);
                         td.appendChild(textoCelda);
                         tr.appendChild(td);
-                            body.appendChild(tr);
-                            // nnn++;
-                         
                         body.appendChild(tr);
-
+                        body.appendChild(tr);
                         nn++;
-
                         var td = document.createElement("td");
                         var textoCelda = document.createTextNode(message[i]["calificacion_actividad"]);
-                        
                         td.appendChild(textoCelda);
-                        // tr.appendChild(td);
-                        // var td = document.createElement("td");
                         tr.appendChild(td);
                     }).catch(function(err){ 
                         console.log(err);
                     });
-               
-                
                 }).catch(function(err){ 
                     console.log(err);
                 });
-                // nnn++;
-                
             }
         }).catch(function(err){ 
             console.log(err);
@@ -137,5 +107,4 @@ function iniciar(){
     }).catch(function(err){ 
         console.log(err);
     });
-
 }

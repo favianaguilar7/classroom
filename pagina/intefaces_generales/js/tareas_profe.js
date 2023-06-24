@@ -1,7 +1,6 @@
 window.onload = init;
 var headers = {};
 var url = "http://localhost:3000";
-// var title_actividad
 function init(){
         iniciar();
 }
@@ -36,7 +35,6 @@ function agregar_alumnos(title_actividad){
             method: 'post',
             url: url+'/user/l/'+ sessionStorage.getItem("id_materia"),
             data:{
-                
             }
         }).then(function(res){
             const {data} = res;
@@ -65,8 +63,6 @@ function agregar_alumnos(title_actividad){
     }).catch(function(err){ 
         console.log(err);
     });
-
-   
 }
 function iniciar(){
     var id = sessionStorage.getItem("id");
@@ -81,7 +77,6 @@ function iniciar(){
         const {message} = data;
         var body = document.getElementsByTagName("section")[0];
         var h2   = document.createElement("h2");
-        // var h2 = document.createElement("h2");
         var textoCelda = document.createTextNode(message[0]["name_profe"]);
         h2.appendChild(textoCelda);
         body.appendChild(h2);
@@ -89,7 +84,6 @@ function iniciar(){
     }).catch(function(err){ 
         console.log(err);
     });
-    ////////////////
 
     axios({
         method: 'post',
@@ -111,13 +105,11 @@ function iniciar(){
             const {data} = res;
             const {message} = data;
             var id = message[0]["id_materia"]
-            ////////
             var body = document.getElementsByTagName("section")[1];
-        var h3   = document.createElement("h3");
-        var textoCelda = document.createTextNode(message[0]["name_materia"]);
-        // agregar_alumnos(message[0]["name_materia"]);
-        h3.appendChild(textoCelda);
-        body.appendChild(h3);
+            var h3   = document.createElement("h3");
+            var textoCelda = document.createTextNode(message[0]["name_materia"]);
+            h3.appendChild(textoCelda);
+            body.appendChild(h3);
             axios({
                 method: 'post',
                 url: url+'/user/f/'+sessionStorage.getItem("id_act"),
@@ -126,7 +118,7 @@ function iniciar(){
                 }
             }).then(function(res){
                 const {data} = res;
-            const {message} = data;
+                const {message} = data;
                 var body = document.getElementsByTagName("section")[2];
                 var h3   = document.createElement("h3");
                 var textoCelda = document.createTextNode(message[0]["title_actividad"]);
@@ -157,7 +149,6 @@ function iniciar(){
     }).then(function(res){
         const {data} = res;
         const {message} = data;
-        // console.log(message);
         var p =0 ;
         for(var i = 0; i < message.length; i++){
             axios({
@@ -187,7 +178,6 @@ function iniciar(){
                     input.setAttribute("value", "Ingresar");
                     input.setAttribute("onclick", "ingresar()");
                     input.setAttribute("id", messagef[0]["id_alumnos"]);
-                    // <td><input class="btn entrar" type="submit" value="Ingresar"></td>
                     td.appendChild(input);
                     tr.appendChild(td);
                 }else{

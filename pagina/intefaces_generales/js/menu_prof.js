@@ -3,22 +3,10 @@ var headers = {};
 var url = "http://localhost:3000";
 
 function init(){
-    // if(localStorage.getItem("token")){
-    //     let token = localStorage.getItem("token");
-    //     headers={
-    //         'Authorization': "bearer " + localStorage.getItem("token")
-    //     }
-        document.querySelector('.entrar').addEventListener('click', openModal);
-        // genera_tabla();
-        iniciar();
-    // }else{
-    //     window.location.href = "login.html"
-    // }
+    document.querySelector('.entrar').addEventListener('click', openModal);
+    iniciar();
 }
-// function ver_materia(){
 
-//     window.location.href = "../intefaces_generales/tareas_pen_profe.html";
-// }
 function ver(){
     var selec =document.querySelectorAll('.entrar')
     console.log(selec.length);
@@ -34,8 +22,8 @@ function ver(){
     }
 }
 
+// sirve para abrir la seccion de codigo id
 function openModal() {
-
     document.getElementById('n1').style.display = 'block';
 }
 function closeModal() {
@@ -59,11 +47,10 @@ function cerrarModal() {
     document.getElementById('n1').style.display = 'none';
 }
 
-
-
 function iniciar(){
     var id = sessionStorage.getItem("id");
-    // console.log(id);
+
+    /// extrae y coloca el nombre del profesor 
     axios({
         method: 'post',
         url: url+'/user/c/'+id,
@@ -73,9 +60,9 @@ function iniciar(){
     }).then(function(res){
         const {data} = res;
         const {message} = data;
+        // en las lineas siguientes 64 - 69 se se agrega un h2 a section del html con el nombre del profesor 
         var body = document.getElementsByTagName("section")[0];
         var h2   = document.createElement("h2");
-        // var h2 = document.createElement("h2");
         var textoCelda = document.createTextNode(message[0]["name_profe"]);
         h2.appendChild(textoCelda);
         body.appendChild(h2);
@@ -84,8 +71,7 @@ function iniciar(){
         console.log(err);
     });
 
-
-
+    // se extraeb y colocan los nombres de las materias en las que imparte clase el profesor
     axios({
         method: 'post',
         url: url+'/user/e/'+id,
@@ -98,40 +84,22 @@ function iniciar(){
         console.log(message);
         var body = document.getElementsByTagName("section")[1];
         for(var i = 0; i < message.length; i++){
-            // var id = message[i]["id_materia"]
-            
             var li = document.createElement("li");
             var h4 = document.createElement("h4");
             var textoCelda = document.createTextNode(message[i]["name_materia"]);
             h4.appendChild(textoCelda);
-            // <button class="btn entrar">Alumnos</button>
             li.appendChild(h4);
-
-
             var button = document.createElement("button");
             button.setAttribute("class", "entrar");
             var textoCelda = document.createTextNode("Entrar");
             button.setAttribute("onclick", "ver()");
             button.setAttribute("id", message[i]["id_materia"]);
             button.appendChild(textoCelda);
-
             li.appendChild(button);
-            // h4.setAttribute("class", "inter");
             li.setAttribute("class", "inter");
             body.setAttribute("class", "container");
-
             body.appendChild(li);
         }
-        
-        
-        
-        
-        // var h2   = document.createElement("h2");
-        // // var h2 = document.createElement("h2");
-        // var textoCelda = document.createTextNode(message[0]["name_materia"]);
-        // h2.appendChild(textoCelda);
-        // body.appendChild(h2);
-        // h2.setAttribute("class", "nombusu");
 
     }).catch(function(err){ 
         console.log(err);

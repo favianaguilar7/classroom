@@ -1,28 +1,22 @@
 window.onload = init;
 var url = "http://localhost:3000";
-
+///// es lo mismo que se realiza en login_alumnos pero en este caso la peticion se realizara a otra url 
 function init(){
-    // if(sessionStorage.getItem("token")){
-    //     window.location.href = "index.html";
-    // }
     document.querySelector('.entrar').addEventListener('click', login);
 }
 function login() {
     var mail = document.getElementById('mail').value;
     var pass = document.getElementById('pass').value;
-    // var acc = 1;
     axios({
         method: 'post',
-        url: url+'/user/login/a',
+        url: url+'/user/login/a', /// url a la que se realizara la peticion
         data:{
             name_profe: mail,
             pass_profe: pass,
-            // emp_acc: acc
         }
     }).then(function(res){
         if(res.data.code === 200){
             console.log(res);
-            // sessionStorage.setItem("token", res.data.message);
             window.location.href = "../intefaces_generales/menu_prof.html";
             sessionStorage.setItem("id",res.data.message[0]['id_profe'])
         }

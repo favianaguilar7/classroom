@@ -1,30 +1,23 @@
 window.onload = init;
 var url = "http://localhost:3000";
-
+/// es el mismo porceso que login_alumno pero en este caso se va a realizar un registro en la base de datos 
 function init(){
-    // if(sessionStorage.getItem("token")){
-    //     window.location.href = "index.html";
-    // }
     document.querySelector('.entrar').addEventListener('click', login);
 }
 function login() {
     var mail = document.getElementById('mail').value;
     var pass = document.getElementById('pass').value;
-    // var acc = 1;
     axios({
         method: 'post',
         url: url+'/user/signin/b',
         data:{
             name_alumnos: mail,
-            pass_alumnos: pass,
-            // emp_acc: acc
+            pass_alumnos: pass
         }
     }).then(function(res){
         if(res.data.code === 200){
             console.log(res);
-            // sessionStorage.setItem("token", res.data.message);
             window.location.href = "../inicio_sesion/inicio_sesion_alumno.html";
-            // sessionStorage.setItem("id",res.data.id)
         }
         else{
             var ms = document.getElementById("ms").innerHTML="Correo / contraseña incorrectos";

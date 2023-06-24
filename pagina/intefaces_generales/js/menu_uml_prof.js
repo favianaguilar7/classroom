@@ -4,16 +4,18 @@ var headers = {};
 var url = "http://localhost:3000";
 
 function init(){
-        // document.querySelector('.entrar').addEventListener('click', ver_materia);
-        iniciar();
+  iniciar();
 }
+
 function ver_materia(){
     
-    window.location.href = "../intefaces_generales/tareas_profe.html";
+  window.location.href = "../intefaces_generales/tareas_profe.html";
 }
+
 function enviar(){
     var retro = document.getElementById("retro").value;
     var calif = document.getElementById("calif").value;
+    /// se envia la retroalimentacion y calificacion que se le va a dar al alumno
     axios({
         method: 'put',
         url: url+'/user/j/'+sessionStorage.getItem("id_alumno")+"/"+sessionStorage.getItem("id_act"),
@@ -24,19 +26,12 @@ function enviar(){
     }).then(function(res){
         alert("Se envio la respuesta exitosamente");
         window.location.href = "../intefaces_generales/tareas_pen_profe.html";
-        // const {data} = res;
-        // const {message} = data;
-        // var body = document.getElementsByTagName("section")[0];
-        // var h2   = document.createElement("h2");
-        // // var h2 = document.createElement("h2");
-        // var textoCelda = document.createTextNode(message[0]["name_profe"]);
-        // h2.appendChild(textoCelda);
-        // body.appendChild(h2);
-        // h2.setAttribute("class", "nombusu");
     }).catch(function(err){ 
         console.log(err);
     });
 }
+
+
 function ingresar(){
     var selec =document.querySelectorAll('.entrar')
     console.log(selec.length);
@@ -65,7 +60,6 @@ function iniciar(){
         const {message} = data;
         var body = document.getElementsByTagName("section")[0];
         var h2   = document.createElement("h2");
-        // var h2 = document.createElement("h2");
         var textoCelda = document.createTextNode(message[0]["name_profe"]);
         h2.appendChild(textoCelda);
         body.appendChild(h2);
@@ -119,7 +113,6 @@ function iniciar(){
     }).then(function(res){
         const {data} = res;
         const {messagef} = data;
-        // console.log(message);
         var body = document.getElementsByTagName("section")[1];
         var h3   = document.createElement("h3");
         var textoCelda = document.createTextNode("Alumno: "+messagef[0]["name_alumnos"]);
@@ -153,14 +146,16 @@ function iniciar(){
         console.log(err);
     });
 
-    // window.onload = traerDatos;
-// function traerDatos(){
+
+  // en la seccion de codigo a continuacion 151-207 en la captera /tarea extrae todos los documentos .java que esten ahi
+  // y de todos ellos va a sacar las clases que inicien con public o private
 
   const xhttp = new XMLHttpRequest();
   xhttp.open('GET', 'tarea', true);
   xhttp.send();
   xhttp.onreadystatechange = function(){
 
+    // en esta parte de aqui 158 - 167 saca los nombres de de los archivos 
     if(this.readyState == 4 && this.status == 200) {
       var texto = this.responseText.split('"');
       for(var i = 0; i < texto.length; i++){
@@ -170,6 +165,8 @@ function iniciar(){
             var control = 0;
             var junto = iter[0]+".java";
 
+            // en esta parte de aqui 168 - 213 imprime las lineas donde se encuentre las palabras de public y privado
+
             const xhttp2 = new XMLHttpRequest();
             xhttp2.open('GET', "./tarea/"+junto , true);
             xhttp2.send();
@@ -177,12 +174,8 @@ function iniciar(){
             xhttp2.onreadystatechange = function(){
               var texto = this.responseText.split("\n");
               control++;
-              
-              // if(control == 9 || control == 10 || control == 11 || control == 12){
-                
                 for(var k = 0; k < texto.length; k++){
                   var iter = texto[k].split(" ");
-                  
                   for(var l = 0; l < iter.length; l++){
                     if(iter[l] == "public" || iter[l] == "private"){
                       if(l === 0){
