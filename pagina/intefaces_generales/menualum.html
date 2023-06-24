@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aplicacion</title>
+  <link rel="stylesheet" href="Estilos_int_G.css">
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="./js/menu_alumnos.js"></script>
+</head>
+
+<body>
+  <header>
+    <div class="Perfusu">
+      <!-- <img src="./"> -->
+      <img src="https://cdn.pixabay.com/photo/2017/11/10/05/48/user-2935527_1280.png" alt="Avatar" class="avatar">
+      <section>
+      </section>
+    </div>
+    <button class="NuevClass" onclick="openModal()">Nueva Clase</button>
+  </header>
+
+  <div class="container">
+    <main>
+        <section class="container">
+
+        </section>
+    </main>
+  </div>
+  <div class="container" id="n1" style="display: none;">
+    <main>
+      <div class="container">
+        <h3>Coloca el id de la clase para ingresar</h3>
+        <input type="text" id="clase">
+        <button onclick="closeModal()">Ingresar</button>
+        <button onclick="cerrarModal()">Cancelar</button>
+      </div>
+    </main>
+  </div>
+</div>
+
+</body>
+
+
+</html>

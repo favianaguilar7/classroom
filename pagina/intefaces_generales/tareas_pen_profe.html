@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aplicacion</title>
+  <link rel="stylesheet" href="Estilos_int_G.css">
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="./js/tareas_pen_profe.js"></script>
+</head>
+
+<body>
+  <header>
+    <div class="Perfusu">
+      <img src="https://cdn.pixabay.com/photo/2017/11/10/05/48/user-2935527_1280.png" alt="Avatar" class="avatar">
+      <!-- <h2 class="nombusu">Nombre del Profesor</h2> -->
+      <section></section>
+    </div>
+    <button class="NuevClass" onclick="openModal()">Nueva actividad</button>
+    
+  </header>
+
+  <div class="container">
+    <main>
+      <div class="container">
+        <div class="barra">
+          <!-- <h3>Nombre de la Materia</h3> -->
+          <section></section>
+          <button class="NuevClass" onclick="alumnos()">Ver calificaciones</button>
+          <!-- <button class="asd">Alumnos</button> -->
+        </div>
+      </div>
+      <div class="container">
+        <table>
+          <thead>
+            <tr>
+              <th>Tarea Pendiente</th>
+              <th>Fecha de Entrega</th>
+              <th>Ir</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- <tr>
+              <td><section></section></td>
+              <td>06/07/23</td>
+              <td><input class="btn entrar" type="submit" value="Ingresar"></td>
+            </tr> -->
+          </tbody>
+        </table>
+      </div>
+    </main>
+  </div>
+  <div class="container" id="n1" style="display: none;">
+    <main>
+      <div class="container">
+        <h3>Nueva actividad</h3>
+        <div>
+          <a>Titulo de la actividad:</a>
+          <input type="text" id="titulo">
+        </div>
+        <div>
+          <a>Descripcion de la actividad:</a>
+          <input type="text" id="des">
+        </div>
+        <div>
+          <a>Fecha de entrega:</a>
+          <input type="date" id="fec">
+        </div>
+
+        <button onclick="closeModal()">Registrar</button>
+        <button onclick="cerrarModal()">Cancelar</button>
+      </div>
+    </main>
+  </div>
+</body>
+
+</html>
